@@ -1,0 +1,10 @@
+.vscode/
+.terraform/
+*.tfvars
+secrets/
+terraform.tfstate*
+*.plan
+.auto.tfvars
+.terraform.*
+values/
+customs/
