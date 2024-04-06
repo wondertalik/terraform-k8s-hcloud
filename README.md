@@ -1,23 +1,23 @@
 # Terraform Kubernetes on Hetzner Cloud
 
-This repository will help to setup an opionated Kubernetes Cluster with [kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) on [Hetzner Cloud](https://www.hetzner.com/cloud?country=us) with network support.
+This repository will help to set up a Kubernetes Cluster with [kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) on [Hetzner Cloud](https://www.hetzner.com/cloud?country=us) with network support.
 
 ## Usage
 
 # Terraform
 
-- Install [terraform cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- Install the [terraform cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
-## Create hetzner project
+## Create a Hetzner project
 
-1. Open [console](https://console.hetzner.cloud) and create [project](https://docs.hetzner.com/cloud/general/faq). Next will be used  `k8s-stand` name
-2. Create [api token](https://docs.hetzner.com/cloud/api/getting-started/generating-api-token) with permissions *Read & Write* from projet `k8s-stand`
+1. Open the [console](https://console.hetzner.cloud) and create a [project](https://docs.hetzner.com/cloud/general/faq). The name `k8s-stand` will be used next.
+2. Create an [api token](https://docs.hetzner.com/cloud/api/getting-started/generating-api-token) with *Read & Write* permissions for the project `k8s-stand`.
 
-### Generate ssh-keys for servers
+### Generate SSH keys for servers
 
-Generate a new SSH keys in your terminal called `id_hetzner_entrance` and `id_hetzner_nodes`. The argument provided with the -f flag creates the key in the current directory and creates four files called id_hetzner_entrance, id_hetzner_entrance.pub and id_hetzner_nodes, id_hetzner_nodes.pub. Change the placeholder email address to your email address.
+Generate new SSH keys in your terminal called `id_hetzner_entrance` and `id_hetzner_nodes`. The argument provided with the -f flag creates the key in the current directory and creates four files: `id_hetzner_entrance`, `id_hetzner_entrance.pub`, `id_hetzner_nodes`, and `id_hetzner_nodes.pub`. Replace the placeholder email address with your own email address.
 
-- Generate ssh-key for entrance server
+- Generate a SSH key for the entrance server
 
 ```sh
 ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_hetzner_entrance
