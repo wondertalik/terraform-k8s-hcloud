@@ -266,6 +266,11 @@ variable "cilium_custom_values_path" {
   default = ""
 }
 
+variable "cilium_kube_proxy_replacement" {
+  type    = bool
+  default = false
+}
+
 variable "hccm_enabled" {
   type    = bool
   default = true

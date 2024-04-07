@@ -3,16 +3,34 @@ set -eux
 
 #install cilium from charts directory
 echo "CILIUM_VERSION: $CILIUM_VERSION"
-helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.yaml \
-   --namespace kube-system \
-   --set operator.replicas=$MASTER_COUNT \
-   --set hubble.relay.enabled=true \
-   --set hubble.ui.enabled=true \
-   --set hubble.ui.ingress.enabled=$RELAY_UI_ENABLED \
-   --set routingMode=native \
-   --set ipv4NativeRoutingCIDR=$POD_NETWORK_CIDR \
-   --set ipam.mode=kubernetes \
-   --set k8s.requireIPv4PodCIDR=true
+
+if [[ $KUBE_PROXY_REPLACEMENT == true ]]; then
+  helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.yaml \
+     --namespace kube-system \
+     --set operator.replicas=$MASTER_COUNT \
+     --set hubble.relay.enabled=true \
+     --set hubble.ui.enabled=true \
+     --set hubble.ui.ingress.enabled=$RELAY_UI_ENABLED \
+     --set routingMode=native \
+     --set ipv4NativeRoutingCIDR=$POD_NETWORK_CIDR \
+     --set ipam.mode=kubernetes \
+     --set k8s.requireIPv4PodCIDR=true \
+     --set kubeProxyReplacement=true \
+     --set k8sServiceHost=$CONTROL_PLANE_ENDPOINT \
+     --set k8sServicePort=6443
+else
+  helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.yaml \
+     --namespace kube-system \
+     --set operator.replicas=$MASTER_COUNT \
+     --set hubble.relay.enabled=true \
+     --set hubble.ui.enabled=true \
+     --set hubble.ui.ingress.enabled=$RELAY_UI_ENABLED \
+     --set routingMode=native \
+     --set ipv4NativeRoutingCIDR=$POD_NETWORK_CIDR \
+     --set ipam.mode=kubernetes \
+     --set k8s.requireIPv4PodCIDR=true
+fi
+
 
 kubectl -n kube-system patch ds cilium --type json -p '[{"op":"add","path":"/spec/template/spec/tolerations/-","value":{"key":"node.cloudprovider.kubernetes.io/uninitialized","value":"true","effect":"NoSchedule"}}]'
 
@@ -32,3 +50,4 @@ rm hubble-linux-${ARCH}.tar.gz{,.sha256sum}
 
 #Restart unmanaged Pods
 kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,HOSTNETWORK:.spec.hostNetwork --no-headers=true | grep '<none>' | awk '{print "-n "$1" "$2}' | xargs -L 1 -r kubectl delete pod
+

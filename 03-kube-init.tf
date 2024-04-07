@@ -53,7 +53,7 @@ resource "null_resource" "init_main_master" {
 
   provisioner "remote-exec" {
     inline = [
-      "SSH_USERNAME=${var.user_name} POD_NETWORK_CIDR=${var.pod_network_cidr} CONTROL_PLANE_ENDPOINT=${var.load_balancer_master_private_ip} CLUSTER_NAME=${var.cluster_name} bash ./scripts/kube-main-master.sh"
+      "SSH_USERNAME=${var.user_name} POD_NETWORK_CIDR=${var.pod_network_cidr} CONTROL_PLANE_ENDPOINT=${var.load_balancer_master_private_ip} CLUSTER_NAME=${var.cluster_name} KUBE_PROXY_REPLACEMENT=${var.cilium_kube_proxy_replacement} bash ./scripts/kube-main-master.sh"
     ]
   }
 
