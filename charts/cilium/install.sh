@@ -3,8 +3,14 @@ set -eux
 
 #install cilium from charts directory
 echo "CILIUM_VERSION: $CILIUM_VERSION"
+
+KUBE_PROXY_REPLACEMENT_OPTIONS=""
+if [[ $KUBE_PROXY_REPLACEMENT == true ]]; then
+  KUBE_PROXY_REPLACEMENT_OPTIONS="--set kubeProxyReplacement=true --set k8sServiceHost=$CONTROL_PLANE_ENDPOINT --set k8sServicePort=6443"
+fi
+# --set ingressController.enabled=true
 helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.yaml \
-   --namespace kube-system \
+   --namespace kube-system $KUBE_PROXY_REPLACEMENT_OPTIONS \
    --set operator.replicas=$MASTER_COUNT \
    --set hubble.relay.enabled=true \
    --set hubble.ui.enabled=true \
@@ -32,3 +38,4 @@ rm hubble-linux-${ARCH}.tar.gz{,.sha256sum}
 
 #Restart unmanaged Pods
 kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,HOSTNETWORK:.spec.hostNetwork --no-headers=true | grep '<none>' | awk '{print "-n "$1" "$2}' | xargs -L 1 -r kubectl delete pod
+

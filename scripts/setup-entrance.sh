@@ -17,3 +17,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.
 apt-get update
 apt-get -qq install -y helm=3.14.2-1
 apt-mark hold helm
+
+add-apt-repository ppa:rmescandon/yq
+apt update
+apt install yq -y
