@@ -43,18 +43,15 @@ kind: KubeProxyConfiguration
 metricsBindAddress: 0.0.0.0:10249
 " > /tmp/kubeadm.yml
 
+KUBE_PROXY_REPLACEMENT_OPTIONS=""
 if [[ $KUBE_PROXY_REPLACEMENT == true ]]; then
-  sudo kubeadm init \
-    --skip-phases=addon/kube-proxy \
-    --upload-certs \
-    --config /tmp/kubeadm.yml \
-    --v=5
-else
-  sudo kubeadm init \
-      --upload-certs \
-      --config /tmp/kubeadm.yml \
-      --v=5 
+  KUBE_PROXY_REPLACEMENT_OPTIONS="--skip-phases=addon/kube-proxy"
 fi
+
+sudo kubeadm init $KUBE_PROXY_REPLACEMENT_OPTIONS \
+  --upload-certs \
+  --config /tmp/kubeadm.yml \
+  --v=5
 
 # used to join nodes to the cluster
 sudo mkdir -p /tmp/kubeadm
