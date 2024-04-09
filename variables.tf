@@ -191,7 +191,7 @@ variable "pod_network_cidr" {
 
 variable "containerd_version" {
   type    = string
-  default = "1.7.14"
+  default = "1.7.15"
 }
 
 variable "runc_version" {
