@@ -34,11 +34,21 @@ ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_hetzner_nodes
 
 # How to use
 
+## Apply terraform configuration
+
 ```sh
 git clone https://github.com/wondertalik/terraform-k8s-hcloud
 terraform init
 terraform plan -out="k8s-stand.plan"
 terraform apply "k8s-stand.plan"
+```
+
+## Reboot servers
+
+For some reason, `cilium connectivity test` doesn't pass without reboot servers. To do it
+
+```sh
+terraform apply -auto-approve -var reboot_servers=true && terraform apply -auto-approve -var reboot_servers=false
 ```
 
 ## Variables
@@ -73,7 +83,6 @@ terraform apply "k8s-stand.plan"
 | `pod_network_cidr`                         | `10.244.0.0/16`          | The pod IPs that was created at installation time                                                                                                        |    No    |
 | `location`                                 | `nbg1`                   | Predefined location, for more locations have a look at https://docs.hetzner.com/cloud/general/locations                                                  |    No    |
 | `kubernetes_version`                       | `1.27.2`                 | Kubernetes version that will be installed                                                                                                                |    No    |
-| `containerd_version`                       | `1.7.0`                  | Version of containerd (container runtimes)                                                                                                               |    No    |
 | `cilium_enabled`                           | `true`                   | Installs Cilium Network Provider after the master comes up                                                                                               |    No    |
 | `cilium_custom_values_path`                | ``                       | Path to custom chart's values                                                                                                                            |    No    |
 | `relay_ui_enabled`                         | `true`                   | Installs Ingress-Nginx after the ingress nodes comes up                                                                                                  |    No    |
@@ -138,7 +147,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - loki [5.5.2](https://artifacthub.io/packages/helm/grafana/loki)
 - promtail [6.11.2](https://artifacthub.io/packages/helm/grafana/promtail)
 - kube-prometheus-stack [54.1.0](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
-- cert-manager [1.14.5](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
+- cert-manager [1.14.](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
 - ingress-nginx [4.8.3](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
 
 ## Contributing

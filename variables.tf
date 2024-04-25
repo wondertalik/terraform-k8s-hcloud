@@ -189,21 +189,6 @@ variable "pod_network_cidr" {
   default = "10.0.16.0/20"
 }
 
-variable "containerd_version" {
-  type    = string
-  default = "1.7.15"
-}
-
-variable "runc_version" {
-  type    = string
-  default = "1.1.12"
-}
-
-variable "cni_plugins_version" {
-  type    = string
-  default = "1.4.0"
-}
-
 variable "kubernetes_version" {
   type    = string
   default = "1.29.3"

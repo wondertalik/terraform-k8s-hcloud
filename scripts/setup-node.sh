@@ -7,8 +7,8 @@ sudo timedatectl set-timezone Europe/Andorra
 CLI_ARCH=amd64
 if [ "$(uname -m)" = "aarch64" ]; then CLI_ARCH=arm64; fi
 
-wget https://github.com/containerd/containerd/releases/download/v[containerd_version]/containerd-[containerd_version]-linux-${CLI_ARCH}.tar.gz
-tar Cxzvf /usr/local containerd-[containerd_version]-linux-${CLI_ARCH}.tar.gz
+wget https://github.com/containerd/containerd/releases/download/v1.7.16/containerd-1.7.16-linux-${CLI_ARCH}.tar.gz
+tar Cxzvf /usr/local containerd-1.7.16-linux-${CLI_ARCH}.tar.gz
 
 mkdir -p /usr/local/lib/systemd/system
 
@@ -60,12 +60,12 @@ END
 systemctl daemon-reload
 systemctl enable --now containerd
 
-wget https://github.com/opencontainers/runc/releases/download/v[runc_version]/runc.${CLI_ARCH}
+wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.${CLI_ARCH}
 install -m 755 runc.${CLI_ARCH} /usr/local/sbin/runc
 
 mkdir -p /opt/cni/bin
-wget https://github.com/containernetworking/plugins/releases/download/v[cni_plugins_version]/cni-plugins-linux-${CLI_ARCH}-v[cni_plugins_version].tgz
-tar Cxzvf /opt/cni/bin cni-plugins-linux-${CLI_ARCH}-v[cni_plugins_version].tgz
+wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-${CLI_ARCH}-v1.4.0.tgz
+tar Cxzvf /opt/cni/bin cni-plugins-linux-${CLI_ARCH}-v1.4.0.tgz
 
 mkdir /etc/containerd
 containerd config default >/etc/containerd/config.toml

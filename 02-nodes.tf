@@ -20,19 +20,10 @@ data "cloudinit_config" "cloud_init_nodes" {
 
     content = replace(
       replace(
-        replace(
-          replace(
-            replace(
-              file("./scripts/setup-node.sh"),
-              "[kubernetes-version]", var.kubernetes_version
-            ),
-            "[kubernetes-major-version]", regex("([0-9]+\\.[0-9]+)\\.([0-9]+)", var.kubernetes_version)[0]
-          ),
-          "[containerd_version]", var.containerd_version
-        ),
-        "[cni_plugins_version]", var.cni_plugins_version
+        file("./scripts/setup-node.sh"),
+        "[kubernetes-version]", var.kubernetes_version
       ),
-      "[runc_version]", var.runc_version
+      "[kubernetes-major-version]", regex("([0-9]+\\.[0-9]+)\\.([0-9]+)", var.kubernetes_version)[0]
     )
   }
 
