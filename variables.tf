@@ -318,7 +318,7 @@ variable "metric_server_enabled" {
 
 variable "metric_server_version" {
   type    = string
-  default = "3.11.0"
+  default = "3.12.1"
 }
 
 variable "metric_server_custom_values_path" {
