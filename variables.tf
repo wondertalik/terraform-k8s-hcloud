@@ -267,7 +267,7 @@ variable "cilium_enabled" {
 
 variable "cilium_version" {
   type    = string
-  default = "1.15.3"
+  default = "1.15.4"
 }
 
 
