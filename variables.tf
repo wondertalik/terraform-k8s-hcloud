@@ -333,7 +333,7 @@ variable "cert_manager_enabled" {
 
 variable "cert_manager_version" {
   type    = string
-  default = "1.14.4"
+  default = "1.14.5"
 }
 
 variable "cert_manager_custom_values_path" {

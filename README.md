@@ -138,7 +138,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - loki [5.5.2](https://artifacthub.io/packages/helm/grafana/loki)
 - promtail [6.11.2](https://artifacthub.io/packages/helm/grafana/promtail)
 - kube-prometheus-stack [54.1.0](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
-- cert-manager [1.14.4](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
+- cert-manager [1.14.5](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
 - ingress-nginx [4.8.3](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
 
 ## Contributing

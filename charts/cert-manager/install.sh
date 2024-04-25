@@ -3,12 +3,12 @@
 set -eux
 
 #install The cert-manager Command Line Tool (cmctl)
-#https://cert-manager.io/docs/reference/cmctl/#installation
+#https://cert-manager.io/docs/reference/cmctl
 ARCH=amd64
 if [ "$(uname -m)" = "aarch64" ]; then ARCH=arm64; fi
-curl -L --fail --remote-name-all https://github.com/cert-manager/cert-manager/releases/latest/download/cmctl-linux-$ARCH.tar.gz
-sudo tar xzvfC cmctl-linux-${ARCH}.tar.gz /usr/local/bin
-rm cmctl-linux-${ARCH}.tar.gz
+curl -fsSL -o cmctl https://github.com/cert-manager/cmctl/releases/latest/download/cmctl_linux_${ARCH}
+chmod +x cmctl
+sudo mv cmctl /usr/local/bin
 
 echo "CERT_MANAGER_VERSION: $CERT_MANAGER_VERSION"
 helm upgrade --install cert-manager charts/cert-manager/src/cert-manager -f charts/cert-manager/values.yaml \
