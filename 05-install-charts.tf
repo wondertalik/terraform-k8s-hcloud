@@ -264,6 +264,7 @@ resource "null_resource" "ingress_nginx" {
 resource "null_resource" "cert_manager" {
   depends_on = [
     null_resource.init_masters,
+    null_resource.cilium
   ]
   triggers = {
     cert_manager_version            = var.cert_manager_version

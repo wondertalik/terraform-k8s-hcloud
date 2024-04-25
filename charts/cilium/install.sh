@@ -41,4 +41,5 @@ rm hubble-linux-${ARCH}.tar.gz{,.sha256sum}
 
 #Restart unmanaged Pods
 kubectl get pods --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,HOSTNETWORK:.spec.hostNetwork --no-headers=true | grep '<none>' | awk '{print "-n "$1" "$2}' | xargs -L 1 -r kubectl delete pod
-
+kubectl -n kube-system rollout restart deployment/cilium-operator
+kubectl -n kube-system rollout restart ds/cilium
