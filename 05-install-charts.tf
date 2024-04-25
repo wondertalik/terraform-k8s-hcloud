@@ -81,7 +81,7 @@ resource "null_resource" "cilium" {
 
   provisioner "remote-exec" {
     inline = [
-      "CILIUM_VERSION=${var.cilium_version} MASTER_COUNT=${local.master_count} RELAY_UI_ENABLED=${var.relay_ui_enabled} POD_NETWORK_CIDR=${var.pod_network_cidr} CONTROL_PLANE_ENDPOINT=${var.load_balancer_master_private_ip} KUBE_PROXY_REPLACEMENT=${var.cilium_kube_proxy_replacement} bash charts/cilium/install.sh",
+      "CILIUM_VERSION=${var.cilium_version} MASTER_COUNT=${local.master_count} RELAY_UI_ENABLED=${var.relay_ui_enabled} POD_NETWORK_CIDR=${var.pod_network_cidr} CONTROL_PLANE_ENDPOINT=${var.load_balancer_master_private_ip} KUBE_PROXY_REPLACEMENT=${var.cilium_kube_proxy_replacement} KUBERNETES_INGRESS_SUPPORT=${var.kubernetes_ingress_support} SHARED_INGRESS_MODE=${var.shared_ingress_mode} LOCATION=${var.location} INGRESS_LOAD_BALANCER_NAME=${var.ingress_load_balancer_name} INGRESS_LOAD_BALANCER_TYPE=${var.ingress_load_balancer_type}  bash charts/cilium/install.sh",
       "echo \"source <(cilium completion bash)\" >> .bashrc"
     ]
   }

@@ -214,6 +214,16 @@ variable "custom_ssh_port" {
   default = 29351
 }
 
+variable "kubernetes_ingress_support" {
+  type    = bool
+  default = true
+}
+
+variable "shared_ingress_mode" {
+  type    = bool
+  default = true
+}
+
 variable "ingress_enabled" {
   type    = bool
   default = true

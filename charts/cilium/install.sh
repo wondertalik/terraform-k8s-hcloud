@@ -4,13 +4,17 @@ set -eux
 #install cilium from charts directory
 echo "CILIUM_VERSION: $CILIUM_VERSION"
 
-KUBE_PROXY_REPLACEMENT_OPTIONS=""
+EXTRA_OPTIONS=""
 if [[ $KUBE_PROXY_REPLACEMENT == true ]]; then
-  KUBE_PROXY_REPLACEMENT_OPTIONS="--set kubeProxyReplacement=true --set k8sServiceHost=$CONTROL_PLANE_ENDPOINT --set k8sServicePort=6443"
+  EXTRA_OPTIONS="--set kubeProxyReplacement=true --set k8sServiceHost=$CONTROL_PLANE_ENDPOINT --set k8sServicePort=6443"
+else
+  EXTRA_OPTIONS="--set knodePort.enabled=true"
 fi
+
 # --set ingressController.enabled=true
 helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.yaml \
-   --namespace kube-system $KUBE_PROXY_REPLACEMENT_OPTIONS \
+   --reuse-values \
+   --namespace kube-system $EXTRA_OPTIONS \
    --set operator.replicas=$MASTER_COUNT \
    --set hubble.relay.enabled=true \
    --set hubble.ui.enabled=true \
@@ -19,7 +23,6 @@ helm upgrade --install cilium charts/cilium/src/cilium -f charts/cilium/values.y
    --set ipv4NativeRoutingCIDR=$POD_NETWORK_CIDR \
    --set ipam.mode=kubernetes \
    --set k8s.requireIPv4PodCIDR=true
-
 kubectl -n kube-system patch ds cilium --type json -p '[{"op":"add","path":"/spec/template/spec/tolerations/-","value":{"key":"node.cloudprovider.kubernetes.io/uninitialized","value":"true","effect":"NoSchedule"}}]'
 
 # install cilium cli tools
