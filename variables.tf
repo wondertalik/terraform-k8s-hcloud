@@ -397,7 +397,7 @@ variable "promtail_version" {
 
 variable "seq_version" {
   type    = string
-  default = "2023.4.2"
+  default = "2024.2.1"
 }
 
 variable "seq_enabled" {

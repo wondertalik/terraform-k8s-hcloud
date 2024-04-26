@@ -205,7 +205,7 @@ helm upgrade --install promtail charts/promtail/src/promtail -f charts/promtail/
 helm uninstall promtail -n monitoring
 ```
 
-### kube-prometheus-stack
+## kube-prometheus-stack
 
 ### Download source chart
 ```
@@ -227,7 +227,7 @@ helm upgrade --install kube-prometheus-stack charts/kube-prometheus-stack/src/ku
 helm uninstall kube-prometheus-stack -n monitoring
 ```
 
-### kube-prometheus-stack
+## rabbitmq
 
 ### Download source chart
 ```
@@ -247,4 +247,26 @@ helm upgrade --install kube-prometheus-stack charts/kube-prometheus-stack/src/ku
 
 ```
 helm uninstall kube-prometheus-stack -n monitoring
+```
+
+## seq
+
+### Download source chart
+```
+helm repo add datalust https://helm.datalust.co
+helm repo update
+helm pull datalust/seq --untar -d charts/seq --untardir src
+helm show values datalust/seq > charts/seq/values.yaml
+```
+
+### Install chart from directory
+
+```
+helm upgrade --install seq charts/seq/src/seq -f charts/seq/values.yaml --namespace observability --create-namespace
+```
+
+### Uninstall
+
+```
+helm uninstall seq -n observability
 ```
