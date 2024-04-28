@@ -415,6 +415,21 @@ variable "seq_custom_values_path" {
   default = ""
 }
 
+variable "jaeger_version" {
+  type    = string
+  default = "1.56"
+}
+
+variable "jaeger_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "jaeger_install" {
+  type    = bool
+  default = false
+}
+
 variable "rabbitmq_version" {
   type    = string
   default = "2.6.0"

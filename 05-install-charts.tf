@@ -438,6 +438,43 @@ resource "null_resource" "promtail" {
   }
 }
 
+resource "null_resource" "jaeger" {
+  depends_on = [
+    null_resource.init_masters
+  ]
+  triggers = {
+    seq_version    = var.jaeger_version
+    jaeger_install = var.jaeger_install
+  }
+  count = var.jaeger_enabled ? 1 : 0
+
+  connection {
+    host        = hcloud_server.entrance_server.ipv4_address
+    port        = var.custom_ssh_port
+    type        = "ssh"
+    private_key = file(var.ssh_private_key_entrance)
+    user        = var.user_name
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p charts",
+      "rm -rf charts/jaeger"
+    ]
+  }
+
+  provisioner "file" {
+    source      = "charts/jaeger"
+    destination = "charts"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "JAEGER_VERSION=${var.jaeger_version} JAEGER_INSTALL=${var.jaeger_install} bash charts/jaeger/install.sh"
+    ]
+  }
+}
+
 resource "null_resource" "seq" {
   depends_on = [
     null_resource.init_masters
