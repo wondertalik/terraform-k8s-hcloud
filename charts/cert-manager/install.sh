@@ -34,7 +34,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          ingressClassName: cilium
+          ingressClassName: nginx
 EOF
 
 kubectl apply -f letsencrypt-prod.yaml
@@ -57,7 +57,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          ingressClassName: cilium
+          ingressClassName: nginx
 EOF
 
 kubectl apply -f letsencrypt-staging.yaml

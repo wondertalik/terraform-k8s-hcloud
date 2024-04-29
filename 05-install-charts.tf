@@ -440,7 +440,8 @@ resource "null_resource" "promtail" {
 
 resource "null_resource" "jaeger" {
   depends_on = [
-    null_resource.init_masters
+    null_resource.init_masters,
+    null_resource.cert_manager
   ]
   triggers = {
     seq_version    = var.jaeger_version

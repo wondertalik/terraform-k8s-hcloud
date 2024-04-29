@@ -181,7 +181,7 @@ variable "ingress_load_balancer_name" {
 # 
 variable "ingress_load_balancer_create_auto" {
   type    = string
-  default = true
+  default = false
 }
 
 variable "pod_network_cidr" {
@@ -201,7 +201,7 @@ variable "custom_ssh_port" {
 
 variable "kubernetes_ingress_support" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "shared_ingress_mode" {
