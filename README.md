@@ -148,7 +148,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - promtail [6.11.2](https://artifacthub.io/packages/helm/grafana/promtail)
 - kube-prometheus-stack [54.1.0](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
 - cert-manager [1.14.](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
-- ingress-nginx [4.8.3](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+- ingress-nginx [4.10.1](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
 
 ## Contributing
 

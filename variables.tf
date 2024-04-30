@@ -216,7 +216,7 @@ variable "ingress_custom_values_path" {
 
 variable "ingress_version" {
   type    = string
-  default = "4.8.3"
+  default = "4.10.1"
 }
 
 variable "oauth2_proxy_enabled" {
