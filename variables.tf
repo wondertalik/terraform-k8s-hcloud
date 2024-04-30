@@ -178,12 +178,6 @@ variable "ingress_load_balancer_name" {
   default = "load-balancer-ingreses"
 }
 
-# 
-variable "ingress_load_balancer_create_auto" {
-  type    = string
-  default = false
-}
-
 variable "pod_network_cidr" {
   type    = string
   default = "10.0.16.0/20"
