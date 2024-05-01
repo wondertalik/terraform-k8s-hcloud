@@ -1,0 +1,18 @@
+services:
+  ubuntu:
+    image: ubuntu:jammy
+    networks:
+      - k8s_hcloud
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    entrypoint: [ "/bin/sh","-c" ]
+    volumes:
+      - ./customs:/root/customs
+    command:
+      - |
+        apt update && apt install -y apache2-utils
+        /bin/sh
+networks:
+  k8s_hcloud:
+    driver: bridge  
