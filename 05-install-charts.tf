@@ -345,7 +345,7 @@ resource "null_resource" "kube-prometheus-stack" {
 
   provisioner "remote-exec" {
     inline = [
-      "KUBE_PROMETHEUS_STACK_VERSION=${var.kube_prometheus_stack_version} KUBE_PROMETHEUS_STACK_INSTALL=${var.kube_prometheus_stack_install} bash charts/kube-prometheus-stack/install.sh"
+      "KUBE_PROMETHEUS_STACK_VERSION=${var.kube_prometheus_stack_version} KUBE_PROMETHEUS_STACK_INSTALL=${var.kube_prometheus_stack_install} GRAFANA_ADMIN_PASSWORD=${var.grafana_admin_password} bash charts/kube-prometheus-stack/install.sh"
     ]
   }
 }

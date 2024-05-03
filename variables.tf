@@ -346,7 +346,12 @@ variable "kube_prometheus_stack_custom_values_path" {
 
 variable "kube_prometheus_stack_version" {
   type    = string
-  default = "45.28.1"
+  default = "58.3.3"
+}
+
+variable "grafana_admin_password" {
+  type    = string
+  default = "prom-operator"
 }
 
 variable "loki_enabled" {
