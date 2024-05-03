@@ -11,7 +11,7 @@ services:
       - ./customs:/root/customs
     command:
       - |
-        apt update && apt install -y apache2-utils
+        apt update && apt install -y apache2-utils openssl
         /bin/sh
 networks:
   k8s_hcloud:
