@@ -231,9 +231,9 @@ helm uninstall kube-prometheus-stack -n monitoring
 
 ### Download source chart
 ```
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add bitnami https://charts.bitnami.com/bitnami  
 helm repo update
-helm pull prometheus-community/kube-prometheus-stack --untar -d charts/kube-prometheus-stack --untardir src
+helm pull bitnami/rabbitmq-cluster-operator --untar -d charts/rabbitmq --untardir src
 helm show values bitnami/rabbitmq-cluster-operator > charts/rabbitmq/values.yaml
 ```
 

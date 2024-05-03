@@ -106,9 +106,12 @@ terraform apply -auto-approve -var reboot_servers=true && terraform apply -auto-
 | `kube_prometheus_stack_enabled`            | `false`                  | Copy Kube Prometheus Stack chart to entrance server                                                                                                      |    No    |
 | `kube_prometheus_stack_install`            | `false`                  | Installs Kube Prometheus Stack chart to entrance server                                                                                                  |    No    |
 | `kube_prometheus_stack_custom_values_path` | ``                       | Path to custom chart's values                                                                                                                            |    No    |
-| `cert_manager_enabled`                     | `false`                  | Installs Cert Manager after the master comes up                                                                                                          |    No    |
+| `cert_manager_enabled`                     | `true`                   | Installs Cert Manager after the master comes up                                                                                                          |    No    |
 | `cert_manager_custom_values_path`          | ``                       | Path to custom chart's values                                                                                                                            |    No    |
 | `cert_manager_acme_email`                  | ``                       | Email address used for ACME registration                                                                                                                 |    No    |
+| `rabbitmq_enabled`                         | `false`                  | Copy RabbitMQ chart to entrance server                                                                                                                   |    No    |
+| `rabbitmq_install`                         | `false`                  | Installs RabbitMQ chart to entrance server                                                                                                               |    No    |
+| `rabbitmq_custom_values_path`              | ``                       | Path to custom chart's values                                                                                                                            |    No    |
 | `reboot_servers`                           | `false`                  | Indicate to reboot all servers                                                                                                                           |    No    |
 
 All variables cloud be passed through `environment variables` or a `tfvars` file.
@@ -149,6 +152,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - kube-prometheus-stack [58.3.3](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
 - cert-manager [1.14.5](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
 - ingress-nginx [4.10.1](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
+- rabbitmq-cluster-operator [4.2.5](https://artifacthub.io/packages/helm/bitnami/rabbitmq-cluster-operator)
 
 ## Contributing
 
