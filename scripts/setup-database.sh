@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eux
 
+timedatectl set-ntp 1
+sudo timedatectl set-timezone Europe/Andorra
+
 #for sharedVcpu servers x86_64
 NODE_PRIVATE_IP=$(ip -4 -o a show ens10 | awk '{print $4}' | cut -d/ -f1)
 if [ -z "$NODE_PRIVATE_IP" ]; then

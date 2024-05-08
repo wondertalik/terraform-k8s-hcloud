@@ -1,6 +1,9 @@
 #!/bin/bash
 set -eux
 
+timedatectl set-ntp 1
+sudo timedatectl set-timezone Europe/Andorra
+
 #add kubernetes repository
 mkdir -p -m 755 /etc/apt/keyrings
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v[kubernetes-major-version]/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
