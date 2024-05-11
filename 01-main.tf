@@ -6,6 +6,7 @@ locals {
   master_count  = length(var.master_group)
   wordker_count = length(var.worker_group_1)
   ingress_count = length(var.ingress_group)
+  asset_count   = length(var.asset_group)
   master_keys   = keys(var.master_group)
 }
 

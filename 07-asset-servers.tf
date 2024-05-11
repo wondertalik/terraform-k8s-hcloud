@@ -168,6 +168,10 @@ resource "null_resource" "post_init_assets" {
     null_resource.cilium
   ]
 
+  triggers = {
+    asset_count = local.asset_count
+  }
+
   connection {
     host        = hcloud_server.entrance_server.ipv4_address
     port        = var.custom_ssh_port
