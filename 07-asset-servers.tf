@@ -161,3 +161,29 @@ resource "null_resource" "init_assets" {
   }
 
 }
+
+resource "null_resource" "post_init_assets" {
+  depends_on = [
+    null_resource.init_assets,
+    null_resource.cilium
+  ]
+
+  connection {
+    host        = hcloud_server.entrance_server.ipv4_address
+    port        = var.custom_ssh_port
+    type        = "ssh"
+    private_key = file(var.ssh_private_key_entrance)
+    user        = var.user_name
+  }
+
+  provisioner "file" {
+    source      = "scripts/configure-assets.sh"
+    destination = "/tmp/configure-assets.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "bash /tmp/configure-assets.sh",
+    ]
+  }
+}
