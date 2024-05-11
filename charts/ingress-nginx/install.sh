@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -eux
 IFS=',' read -a names <<< $NODE_NAMES
-for nodename in $names
+for nodename in ${names[@]}
 do
     kubectl taint --overwrite=true nodes $nodename "node-role.kubernetes.io/ingress"=:NoSchedule
     kubectl label nodes $nodename "node.kubernetes.io/node-type-app=ingress-controller"
