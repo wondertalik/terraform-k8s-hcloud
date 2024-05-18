@@ -149,7 +149,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - metrics-server [3.12.1](https://artifacthub.io/packages/helm/metrics-server/metrics-server)
 - loki [5.5.2](https://artifacthub.io/packages/helm/grafana/loki)
 - promtail [6.11.2](https://artifacthub.io/packages/helm/grafana/promtail)
-- kube-prometheus-stack [58.3.3](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
+- kube-prometheus-stack [58.5.3](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
 - cert-manager [1.14.5](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
 - ingress-nginx [4.10.1](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
 - rabbitmq-cluster-operator [4.2.10](https://artifacthub.io/packages/helm/bitnami/rabbitmq-cluster-operator)

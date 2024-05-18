@@ -1290,6 +1290,12 @@ kubelet:
     ##
     https: true
 
+    ## Skip TLS certificate validation when scraping.
+    ## This is enabled by default because kubelet serving certificate deployed by kubeadm is by default self-signed
+    ## ref: https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/#kubelet-serving-certs
+    ##
+    insecureSkipVerify: true
+
     ## Enable scraping /metrics/cadvisor from kubelet's service
     ##
     cAdvisor: true
@@ -2222,6 +2228,8 @@ prometheusOperator:
     #   argocd.argoproj.io/hook-delete-policy: HookSucceeded
 
     namespaceSelector: {}
+    objectSelector: {}
+
 
     deployment:
       enabled: false
@@ -2846,7 +2854,7 @@ prometheusOperator:
   thanosImage:
     registry: quay.io
     repository: thanos/thanos
-    tag: v0.34.1
+    tag: v0.35.0
     sha: ""
 
   ## Set a Label Selector to filter watched prometheus and prometheusAgent
@@ -3411,7 +3419,7 @@ prometheus:
     image:
       registry: quay.io
       repository: prometheus/prometheus
-      tag: v2.51.2
+      tag: v2.52.0
       sha: ""
 
     ## Tolerations for use with node taints
@@ -4399,7 +4407,7 @@ thanosRuler:
     image:
       registry: quay.io
       repository: thanos/thanos
-      tag: v0.34.1
+      tag: v0.35.0
       sha: ""
 
     ## Namespaces to be selected for PrometheusRules discovery.
