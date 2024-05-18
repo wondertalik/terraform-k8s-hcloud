@@ -137,7 +137,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 
 **Tested with**
 
-- Terraform [v1.4.4](https://github.com/hashicorp/terraform/tree/v1.4.4)
+- Terraform [v1.8.3](https://github.com/hashicorp/terraform/tree/v1.4.4)
 - provider.hcloud [v1.45.0](https://github.com/terraform-providers/terraform-provider-hcloud)
 - hashicorp/null [v3.2.2](https://github.com/terraform-providers/terraform-provider-hcloud)
 - hashicorp/cloudinit [v2.3.3](https://registry.terraform.io/providers/hashicorp/cloudinit)
