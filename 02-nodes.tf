@@ -110,6 +110,10 @@ resource "hcloud_server" "worker_group_1" {
     ipv6_enabled = true
   }
 
+  lifecycle {
+    ignore_changes = all
+  }
+
   connection {
     host        = self.ipv4_address
     port        = var.custom_ssh_port
@@ -156,6 +160,10 @@ resource "hcloud_server" "ingress" {
   public_net {
     ipv4_enabled = true
     ipv6_enabled = true
+  }
+
+  lifecycle {
+    ignore_changes = all
   }
 
   connection {
