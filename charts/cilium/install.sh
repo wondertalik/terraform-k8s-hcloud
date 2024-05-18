@@ -34,7 +34,7 @@ sudo tar xzvfC cilium-linux-${ARCH}.tar.gz /usr/local/bin
 rm cilium-linux-${ARCH}.tar.gz{,.sha256sum}
 
 #install hubble cli
-curl -L --fail --remote-name-all https://github.com/cilium/hubble/releases/download/v0.13.3/hubble-linux-${ARCH}.tar.gz{,.sha256sum}
+curl -L --fail --remote-name-all https://github.com/cilium/hubble/releases/download/v0.13.4/hubble-linux-${ARCH}.tar.gz{,.sha256sum}
 sha256sum --check hubble-linux-${ARCH}.tar.gz.sha256sum
 sudo tar xzvfC hubble-linux-${ARCH}.tar.gz /usr/local/bin
 rm hubble-linux-${ARCH}.tar.gz{,.sha256sum}
