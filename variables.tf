@@ -431,7 +431,7 @@ variable "jaeger_install" {
 
 variable "rabbitmq_version" {
   type    = string
-  default = "4.2.5"
+  default = "4.2.10"
 }
 
 variable "rabbitmq_enabled" {

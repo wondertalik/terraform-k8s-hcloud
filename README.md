@@ -152,7 +152,7 @@ user_passwd                              = "<yourgeneratedtoken>"
 - kube-prometheus-stack [58.3.3](https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack)
 - cert-manager [1.14.5](https://artifacthub.io/packages/helm/cert-manager/cert-manager)
 - ingress-nginx [4.10.1](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx)
-- rabbitmq-cluster-operator [4.2.5](https://artifacthub.io/packages/helm/bitnami/rabbitmq-cluster-operator)
+- rabbitmq-cluster-operator [4.2.10](https://artifacthub.io/packages/helm/bitnami/rabbitmq-cluster-operator)
 
 ## Contributing
 
