@@ -236,7 +236,7 @@ variable "oauth2_proxy_custom_values_path" {
 
 variable "oauth2_proxy_version" {
   type    = string
-  default = "7.5.3"
+  default = "7.5.4"
 }
 
 variable "cilium_enabled" {
