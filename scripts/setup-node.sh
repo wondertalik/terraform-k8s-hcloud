@@ -7,8 +7,8 @@ sudo timedatectl set-timezone Europe/Andorra
 CLI_ARCH=amd64
 if [ "$(uname -m)" = "aarch64" ]; then CLI_ARCH=arm64; fi
 
-wget https://github.com/containerd/containerd/releases/download/v1.7.16/containerd-1.7.16-linux-${CLI_ARCH}.tar.gz
-tar Cxzvf /usr/local containerd-1.7.16-linux-${CLI_ARCH}.tar.gz
+wget https://github.com/containerd/containerd/releases/download/v1.7.17/containerd-1.7.17-linux-${CLI_ARCH}.tar.gz
+tar Cxzvf /usr/local containerd-1.7.17-linux-${CLI_ARCH}.tar.gz
 
 mkdir -p /usr/local/lib/systemd/system
 

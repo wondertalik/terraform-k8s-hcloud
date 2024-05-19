@@ -185,7 +185,7 @@ variable "pod_network_cidr" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.29.3"
+  default = "1.29.5"
 }
 
 variable "custom_ssh_port" {
