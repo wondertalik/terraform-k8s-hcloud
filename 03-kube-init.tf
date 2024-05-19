@@ -58,7 +58,7 @@ resource "null_resource" "init_main_master" {
   }
 
   provisioner "local-exec" {
-    command = "mkdir -p ${path.module}/secrets && touch ${path.module}/secrets/kubeadm_control_plane_join && touch ${path.module}/secrets/kubeadm_join && touch ${path.module}/secrets/kubeadm_config"
+    command = "mkdir -p ${path.module}/secrets && touch ${path.module}/secrets/kubeadm_config"
   }
 
   provisioner "local-exec" {
@@ -106,10 +106,70 @@ resource "null_resource" "init_main_master" {
   }
 }
 
+resource "null_resource" "copy_kubeadm_secrets" {
+  depends_on = [
+    null_resource.init_main_master
+  ]
+
+  connection {
+    host        = hcloud_server.master[local.master_keys[0]].ipv4_address
+    port        = var.custom_ssh_port
+    type        = "ssh"
+    private_key = file(var.ssh_private_key_nodes)
+    user        = var.user_name
+  }
+
+  triggers = {
+    "nodes_count" = local.master_count + local.wordker_count + local.ingress_count + local.asset_count
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir -p scripts"
+    ]
+  }
+
+  provisioner "file" {
+    source      = "scripts/create-tokens.sh"
+    destination = "scripts/create-tokens.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "SSH_USERNAME=${var.user_name} bash ./scripts/create-tokens.sh"
+    ]
+  }
+
+  provisioner "local-exec" {
+    command = "mkdir -p ${path.module}/secrets && touch ${path.module}/secrets/kubeadm_control_plane_join && touch ${path.module}/secrets/kubeadm_join"
+  }
+
+  provisioner "local-exec" {
+    command = "bash scripts/copy-kubeadm-tokens.sh"
+
+    environment = {
+      SSH_PRIVATE_KEY = var.ssh_private_key_nodes
+      SSH_USERNAME    = var.user_name
+      SSH_PORT        = var.custom_ssh_port
+      SSH_HOST        = hcloud_server.master[local.master_keys[0]].ipv4_address
+      TARGET          = "${path.module}/secrets/"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "rm -rf /tmp/kubeadm",
+      "rm -rf scripts"
+    ]
+  }
+
+}
+
 resource "null_resource" "init_masters" {
   depends_on = [
     null_resource.init_main_master,
-    null_resource.pre_init_masters
+    null_resource.pre_init_masters,
+    null_resource.copy_kubeadm_secrets,
   ]
 
   count = local.master_count
