@@ -120,7 +120,7 @@ resource "null_resource" "copy_kubeadm_secrets" {
   }
 
   triggers = {
-    "nodes_count" = local.master_count + local.wordker_count + local.ingress_count + local.asset_count
+    "nodes_count" = local.master_count + local.worker_count + local.ingress_count + local.asset_count
   }
 
   provisioner "remote-exec" {

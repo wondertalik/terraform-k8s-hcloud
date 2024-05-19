@@ -4,7 +4,7 @@ provider "hcloud" {
 
 locals {
   master_count  = length(var.master_group)
-  wordker_count = length(var.worker_group_1)
+  worker_count  = length(var.worker_group_1)
   ingress_count = length(var.ingress_group)
   asset_count   = length(var.asset_group)
   master_keys   = keys(var.master_group)
@@ -33,7 +33,7 @@ resource "hcloud_placement_group" "placement_cluster_masters_1" {
 }
 
 resource "hcloud_placement_group" "placement_worker_group_1" {
-  count = local.wordker_count > 0 ? 1 : 0
+  count = local.worker_count > 0 ? 1 : 0
   name  = "placement-workers-1"
   type  = "spread"
   labels = {
