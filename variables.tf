@@ -346,7 +346,7 @@ variable "kube_prometheus_stack_custom_values_path" {
 
 variable "kube_prometheus_stack_version" {
   type    = string
-  default = "58.5.3"
+  default = "58.6.0"
 }
 
 variable "grafana_admin_password" {
